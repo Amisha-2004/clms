@@ -1,0 +1,223 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://img.freepik.com/premium-photo/chemistry-lab-man-with-tablet-laboratory-with-generative-ai_1375-16930.jpg');
+            background-size: cover;
+            background-position: center;
+            flex-direction: column;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+
+        .navbar .logo {
+            font-size: 30px;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .navbar .right-menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .icon {
+            font-size: 20px;
+            color: #fff;
+            margin-right: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .navbar .icon:hover {
+            color: #28a745; /* Green color on hover */
+        }
+
+        /* Glass Effect for Main Content */
+        .glass-container {
+            width: 80%;
+            max-width: 800px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto 1fr;
+            gap: 20px;
+            justify-items: center;
+            margin-top: 250px; /* Adjust this to ensure space between navbar and content */
+        }
+
+        h2 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 30px 40px;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            color: black;
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .dropdown {
+            display: none;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 16px;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .apply-btn {
+            display: none;
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 15px;
+            cursor: pointer;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .apply-btn:hover {
+            background-color: #218838;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">Digital Alchemy Lab</div>
+        <div class="right-menu">
+            <span class="icon">&#128276;</span> <!-- Notification Icon -->
+            <span class="icon">&#128273;</span> <!-- Change Password Icon -->
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="glass-container">
+        <h2>Welcome to the Lab</h2>
+
+        <div class="button-container">
+            <button class="button" id="chemicalsBtn">Chemicals</button>
+            <button class="button">Equipments</button>
+            <button class="button">Glasswares</button>
+            <button class="button">Furniture</button>
+            <button class="button" id="fineBtn">Fine</button>
+            <button class="button">Approvals</button>
+            
+            <!-- Supplier and Purchase Links -->
+            <button class="button"><a href="{% url 'supplier_table' %}" style="color: white; text-decoration: none;">Supplier</a></button>
+            <button class="button"><a href="{% url 'purchase_list' %}" style="color: white; text-decoration: none;">Purchase</a></button>
+            <button class="button">Students</button>
+            <button class="button">Daily Usage</button>
+        </div>
+
+        <!-- Dropdown for Chemicals -->
+        <div id="chemicalsDropdown" class="dropdown">
+            <select id="chemicalsSelect">
+                <option value="">Select Chemical Type</option>
+                <option value="organic">Organic</option>
+                <option value="inorganic">Inorganic</option>
+            </select>
+        </div>
+
+        <!-- Dropdown for Fine -->
+        <div id="departmentDropdown" class="dropdown">
+            <select id="departmentSelect">
+                <option value="">Select Department</option>
+                <option value="dept1">Department 1</option>
+                <option value="dept2">Department 2</option>
+                <option value="dept3">Department 3</option>
+                <option value="dept4">Department 4</option>
+                <option value="dept5">Department 5</option>
+            </select>
+        </div>
+
+        <!-- Dropdown for Years -->
+        <div id="yearDropdown" class="dropdown">
+            <select id="yearSelect">
+                <option value="">Select Year</option>
+                <option value="year1">Year 1</option>
+                <option value="year2">Year 2</option>
+                <option value="year3">Year 3</option>
+            </select>
+        </div>
+
+        <!-- Apply Button -->
+        <button id="applyBtn" class="apply-btn">Apply</button>
+    </div>
+</body>
+</html>
+

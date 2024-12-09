@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Supplier Table</title>
+
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            display: flex;
+            justify-content: flex-start;
+            gap: 15px;
+            background-color: #333;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            background-color: #333;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background-color: #575757;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        /* Action Buttons */
+        .action-btn {
+            padding: 5px 10px;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            margin: 0 5px;
+        }
+
+        .edit-btn {
+            background-color: #4CAF50; /* Green */
+        }
+
+        .edit-btn:hover {
+            background-color: #45a049;
+        }
+
+        .delete-btn {
+            background-color: #f44336; /* Red */
+        }
+
+        .delete-btn:hover {
+            background-color: #e53935;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Supplier Table</h1>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="{% url 'add_supplier' %}">Add Supplier</a>
+    </div> 
+
+    <!-- Table displaying supplier data -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Address</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for supplier in suppliers %}
+            <tr>
+                <td>{{ supplier.Supplier_id }}</td>
+                <td>{{ supplier.Name }}</td>
+                <td>{{ supplier.Code }}</td>
+                <td>{{ supplier.Address }}</td>
+                <td>{{ supplier.Contact_no }}</td>
+                <td>{{ supplier.Email }}</td>
+                <td>
+                    <a href="{% url 'edit_supplier' supplier.Supplier_id %}" class="action-btn edit-btn">Edit</a>
+                    <a href="{% url 'delete_supplier' supplier.Supplier_id %}" class="action-btn delete-btn">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

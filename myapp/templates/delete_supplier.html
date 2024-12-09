@@ -1,0 +1,17 @@
+<!-- delete_supplier.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Supplier</title>
+</head>
+<body>
+    <h1>Delete Supplier</h1>
+    
+    <!-- Form for selecting a supplier by ID -->
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Display the dropdown here -->
+        <button type="submit">Delete Supplier</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,477 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supplier Management</title>
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 10px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .navbar a {
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: #575757;
+        }
+
+        .content {
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+       
+    </style>
+</head>
+<body>
+
+    Navbar -->
+    <!-- <div class="navbar">
+        <a href="home_final_1111.html" class="back-btn" onclick="history.back()">
+            <i class="fas fa-arrow-left"></i> Back
+        </a>
+        <div>
+            <a href="#" id="insert">Insert</a>
+            <a href="#" id="delete">Delete</a>
+            <a href="#" id="edit">Edit</a>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <!-- <div class="content">
+        <h1>Supplier Information</h1>
+
+        <!-- Table displaying supplier data -->
+        <!-- <table id="supplierTable">
+            <thead>
+                <tr>
+                    <th>Supplier_id</th>
+                    <th>Name</th>
+                    <th>Code</th>
+                    <th>Address</th>
+                    <th>Contact_no</th>
+                    <th>Email_id</th>
+                </tr>
+            </thead>
+           
+                
+<tbody> 
+    {% for purchase in purchases %} 
+    <tr data-id="{{ purchase.purchase_id }}"> 
+    <td>{{ purchase.purchase_id }}</td> 
+    <td>{{ purchase.supplier.name }}</td> 
+    <td>{{ purchase.supplier.supplier_id }}</td> 
+    <td>{{ purchase.date_of_purchase }}</td>
+     <td>{{ purchase.item_purchased }}</td> 
+    <td>{{ purchase.quantity }}</td> 
+    <td>${{ purchase.unit_price }}</td>
+     <td>${{ purchase.total_price }}</td> 
+    </tr> {% endfor %} 
+    </tbody>
+        </table>
+    </div>
+
+    
+</body>
+</html> --> --> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supplier Information</title>
+
+    <!-- Include Font Awesome for the back arrow icon -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 10px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .navbar a {
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: #575757;
+        }
+
+        /* Back Button Icon */
+        .back-btn {
+            color: white;
+            font-size: 18px;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: #575757;
+        }
+
+        /* Page Content */
+        .content {
+            margin-top: 60px; /* Make room for the fixed navbar */
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        /* Form Styling */
+        .form-container {
+            display: none;
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 20px auto;
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .form-container button {
+            padding: 10px 15px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #575757;
+        }
+
+        /* Edit Form Styling */
+        .edit-form {
+            display: none;
+            margin-top: 20px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .edit-form input {
+            padding: 8px;
+            margin: 10px 0;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .edit-form button {
+            padding: 10px 15px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .edit-form button:hover {
+            background-color: #575757;
+        }
+
+        /* Delete Form Styling */
+        .delete-form-container {
+            display: none;
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 20px auto;
+        }
+
+        .delete-form-container label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .delete-form-container input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .delete-form-container button {
+            padding: 10px 15px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .delete-form-container button:hover {
+            background-color: #575757;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <!-- Back button (left side) -->
+        <a href="#" class="back-btn" onclick="history.back()">
+            <i class="fas fa-arrow-left"></i> Back
+        </a>
+
+        <!-- Insert, Delete, Edit (right side) -->
+        <div>
+            <a href="#" id="insert">Insert</a>
+            <a href="#" id="delete">Delete</a>
+            <a href="#" id="edit" onclick="showEditForm()">Edit</a>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="content">
+        <h1>Supplier Information</h1>
+        
+        <!-- Table displaying supplier data -->
+        <table id="supplierTable">
+            <thead>
+                <tr>
+                    <th>Supplier_id</th>
+                    <th>Name</th>
+                    <th>Code</th>
+                    <th>Address</th>
+                    <th>Contact_no</th>
+                    <th>Email_id</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Example table rows -->
+                <tr data-id="1">
+                    <td>1</td>
+                    <td>ABC Suppliers</td>
+                    <td>SUP123</td>
+                    <td>123 Elm Street, NY</td>
+                    <td>555-1234</td>
+                    <td>abc@suppliers.com</td>
+                </tr>
+                <tr data-id="2">
+                    <td>2</td>
+                    <td>XYZ Traders</td>
+                    <td>SUP456</td>
+                    <td>456 Oak Avenue, CA</td>
+                    <td>555-5678</td>
+                    <td>xyz@traders.com</td>
+                </tr>
+                <tr data-id="3">
+                    <td>3</td>
+                    <td>LMN Distributors</td>
+                    <td>SUP789</td>
+                    <td>789 Pine Road, TX</td>
+                    <td>555-9101</td>
+                    <td>lmn@distributors.com</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Edit Form -->
+    <div class="edit-form" id="editForm">
+        <h2>Edit Supplier</h2>
+        <input type="text" id="supplierIdInput" placeholder="Enter Supplier ID">
+        <button onclick="loadSupplierData()">Apply</button>
+
+        <div id="supplierDetails" style="display: none;">
+            <input type="text" id="name" placeholder="Supplier Name">
+            <input type="text" id="code" placeholder="Supplier Code">
+            <input type="text" id="address" placeholder="Supplier Address">
+            <input type="text" id="contact_no" placeholder="Supplier Contact No">
+            <input type="email" id="email_id" placeholder="Supplier Email ID">
+            <button onclick="saveSupplierData()">Save</button>
+        </div>
+    </div>
+
+    <script>
+        function showEditForm() {
+            document.getElementById('editForm').style.display = 'block';
+        }
+
+        function loadSupplierData() {
+            const supplierId = document.getElementById('supplierIdInput').value;
+            const table = document.getElementById('supplierTable');
+            const rows = table.getElementsByTagName('tr');
+            
+            let supplierData = null;
+            
+            for (let row of rows) {
+                if (row.dataset.id == supplierId) {
+                    supplierData = row.getElementsByTagName('td');
+                    break;
+                }
+            }
+            
+            if (supplierData) {
+                document.getElementById('name').value = supplierData[1].textContent;
+                document.getElementById('code').value = supplierData[2].textContent;
+                document.getElementById('address').value = supplierData[3].textContent;
+                document.getElementById('contact_no').value = supplierData[4].textContent;
+                document.getElementById('email_id').value = supplierData[5].textContent;
+                document.getElementById('supplierDetails').style.display = 'block';
+            } else {
+                alert('Supplier not found');
+            }
+        }
+
+        function saveSupplierData() {
+            const supplierId = document.getElementById('supplierIdInput').value;
+            const name = document.getElementById('name').value;
+            const code = document.getElementById('code').value;
+            const address = document.getElementById('address').value;
+            const contact_no = document.getElementById('contact_no').value;
+            const email_id = document.getElementById('email_id').value;
+
+            const table = document.getElementById('supplierTable');
+            const rows = table.getElementsByTagName('tr');
+            
+            for (let row of rows) {
+                if (row.dataset.id == supplierId) {
+                    row.getElementsByTagName('td')[1].textContent = name;
+                    row.getElementsByTagName('td')[2].textContent = code;
+                    row.getElementsByTagName('td')[3].textContent = address;
+                    row.getElementsByTagName('td')[4].textContent = contact_no;
+                    row.getElementsByTagName('td')[5].textContent = email_id;
+                    break;
+                }
+            }
+            
+            document.getElementById('editForm').style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>
