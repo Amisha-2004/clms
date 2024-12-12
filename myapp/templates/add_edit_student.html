@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Supplier</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>{{ action }} Student</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,6 +11,7 @@
             background-color: #f4f4f4;
         }
 
+        /* Navbar Styling */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -37,6 +37,7 @@
             background-color: #575757;
         }
 
+        /* Content Styling */
         .content {
             margin-top: 60px;
             text-align: center;
@@ -60,7 +61,8 @@
             margin-bottom: 8px;
         }
 
-        .form-container input {
+        .form-container input, 
+        .form-container select {
             width: 100%;
             padding: 8px;
             margin-bottom: 10px;
@@ -83,29 +85,12 @@
     </style>
 </head>
 <body>
-
-    <!-- Navbar -->
-    <div class="navbar">
-        <a href="{% url 'supplier_table' %}" class="back-btn">
-            <i class="fas fa-arrow-left"></i> Back
-        </a>
-    </div>
-
-    <!-- Page Content -->
-    <div class="content">
-        <h1>Edit Supplier</h1>
-
-        <!-- Edit Supplier Form -->
-        <div class="form-container">
-            <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}  <!-- Render the form fields -->
-
-                <button type="submit">Save Changes</button>
-            </form>
-        </div>
-    </div>
-
+    <h1>{{ action }} Student</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">{{ action }}</button>
+    </form>
+    <a href="{% url 'student_list' %}">Back to Student List</a>
 </body>
 </html>
-

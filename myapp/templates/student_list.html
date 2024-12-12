@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Item Table</title>
+    <title>Student Table</title>
     <style>
         /* Basic reset */
         * {
@@ -101,39 +101,33 @@
 
     <!-- Navbar -->
     <div class="navbar">
-        <a href="{% url 'add_item' %}">Add Item</a>
+        <a href="{% url 'add_student' %}">Add Student</a>
     </div>
 
-    <!-- Table displaying item data -->
-    <h1>Item Table</h1>
+    <!-- Table displaying student data -->
+    <h1>Student Table</h1>
     <table>
         <thead>
             <tr>
-                <th>Item ID</th>
+                <th>Student ID</th>
                 <th>Name</th>
-                <th>Specification</th>
-                <th>Location</th>
-                <th>Company</th>
-                <th>Fund Type</th>
-                <th>Status</th>
-                <th>Category</th>
+                <th>Department</th>
+                <th>Batch</th>
+                <th>Roll No</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            {% for item in items %}
+            {% for student in students %}
             <tr>
-                <td>{{ item.item_id }}</td>
-                <td>{{ item.name }}</td>
-                <td>{{ item.specification }}</td>
-                <td>{{ item.location }}</td>
-                <td>{{ item.company }}</td>
-                <td>{{ item.fund_type }}</td>
-                <td>{{ item.status }}</td>
-                <td>{{ item.category }}</td>
+                <td>{{ student.student_id }}</td>
+                <td>{{ student.name }}</td>
+                <td>{{ student.department }}</td>
+                <td>{{ student.batch }}</td>
+                <td>{{ student.roll_no }}</td>
                 <td>
-                    <a href="{% url 'edit_item' item.item_id %}" class="action-btn edit-btn">Edit</a>
-                    <a href="{% url 'delete_item' item.item_id %}" class="action-btn delete-btn">Delete</a>
+                    <a href="{% url 'edit_student' student.student_id %}" class="action-btn edit-btn">Edit</a>
+                    <a href="{% url 'delete_student' student.student_id %}" class="action-btn delete-btn">Delete</a>
                 </td>
             </tr>
             {% endfor %}

@@ -1,7 +1,179 @@
-<h1>Add Item</h1>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
-</form>
-<a href="{% url 'item_list' %}">Cancel</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Item</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 10px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .navbar a {
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: #575757;
+        }
+
+        /* Content Styling */
+        .content {
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 20px auto;
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .form-container input, 
+        .form-container select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .form-container button {
+            padding: 10px 15px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #575757;
+        }
+
+        /* Hide elements by default */
+        .conditional-dropdown {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Add Item</h1>
+    <div class="form-container">
+        <form method="post">
+            {% csrf_token %}
+
+            <!-- Item Type Dropdown -->
+            <label for="item_type">Item Type</label>
+            <select id="item_type" name="item_type" required>
+                <option value="">--Select Type--</option>
+                <option value="furniture">Furniture</option>
+                <option value="equipment">Equipment</option>
+                <option value="glassware">Glassware</option>
+                <option value="chemical">Chemical</option>
+            </select>
+
+            <!-- Condition Dropdown (for Damage/Repair/Working or Organic/Inorganic) -->
+            <div class="conditional-dropdown" id="condition-container">
+                <label for="condition">Condition</label>
+                <select id="condition" name="condition">
+                    <option value="working">Working</option>
+                    <option value="repair">Repair</option>
+                    <option value="damaged">Damaged</option>
+                    <option value="organic">Organic</option>
+                    <option value="inorganic">Inorganic</option>
+                </select>
+            </div>
+
+            <!-- Expiration Date (for chemicals) -->
+            <div class="conditional-dropdown" id="exp-date-container">
+                <label for="exp_date">Expiration Date</label>
+                <input type="date" id="exp_date" name="exp_date">
+            </div>
+
+            <!-- Item ID -->
+            <label for="itemid">Item ID</label>
+            <input type="text" id="itemid" name="itemid" required>
+
+            <!-- Name -->
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <!-- Specification -->
+            <label for="specification">Specification</label>
+            <input type="text" id="specification" name="specification" required>
+
+            <!-- Location -->
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" required>
+
+            <!-- Company -->
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" required>
+
+            <!-- Fund Type -->
+            <label for="fundtype">Fund Type</label>
+            <input type="text" id="fundtype" name="fundtype" required>
+
+            <button type="submit">Save</button>
+        </form>
+    </div>
+
+    <script>
+        // JavaScript to handle the conditional dropdown visibility based on item type
+        document.getElementById('item_type').addEventListener('change', function() {
+            var itemType = this.value;
+            var conditionContainer = document.getElementById('condition-container');
+            var expDateContainer = document.getElementById('exp-date-container');
+            
+            // Reset visibility of dropdowns
+            conditionContainer.style.display = 'none';
+            expDateContainer.style.display = 'none';
+
+            if (itemType === 'furniture' || itemType === 'equipment' || itemType === 'glassware') {
+                // Show condition dropdown (damage/repair/working)
+                conditionContainer.style.display = 'block';
+            } else if (itemType === 'chemical') {
+                // Show condition dropdown (organic/inorganic)
+                conditionContainer.style.display = 'block';
+                // Show expiration date input
+                expDateContainer.style.display = 'block';
+            }
+        });
+    </script>
+
+</body>
+</html>

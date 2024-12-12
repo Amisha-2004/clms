@@ -170,21 +170,37 @@
         <h2>Welcome to the Lab</h2>
 
         <div class="button-container">
-            <button class="button" id="chemicalsBtn">Chemicals</button>
-            <button class="button">Equipments</button>
+            <!-- Button to navigate to the student table page -->
+            <button class="button"><a href="{% url 'student_list' %}" style="color: white; text-decoration: none;">Students</a></button>
+
+            <!-- Other buttons (optional) -->
+            <button class="button"><a href="{% url 'item_list' %}" style="color: white; text-decoration: none;">Chemicals</a></button>
+            <!-- <button class="button">Equipments</button>
             <button class="button">Glasswares</button>
-            <button class="button">Furniture</button>
+            <button class="button">Furniture</button> -->
             <button class="button" id="fineBtn">Fine</button>
             <button class="button">Approvals</button>
-            
+            <!-- <button class="button">Purchase</button> -->
+             <!-- Inside the home page template -->
+<button class="button">
+    <a href="{% url 'purchase_list' %}" style="color: white; text-decoration: none;">Purchase</a>
+</button>
             <!-- Supplier and Purchase Links -->
             <button class="button"><a href="{% url 'supplier_table' %}" style="color: white; text-decoration: none;">Supplier</a></button>
-            <button class="button"><a href="{% url 'purchase_list' %}" style="color: white; text-decoration: none;">Purchase</a></button>
-            <button class="button">Students</button>
-            <button class="button">Daily Usage</button>
+            <!-- <button class="button">Daily Usage</button> -->
+            <button class="button">
+                <a href="{% url 'usage_list' %}" style="color: white; text-decoration: none;">Daily Usage</a>
+            </button>
+            <button class="button">
+                <a href="{% url 'purchase_sub_list' %}" style="color: white; text-decoration: none;">Purchasesub</a>
+
+
+            </button>
+            
+            
         </div>
 
-        <!-- Dropdown for Chemicals -->
+        <!-- Dropdowns and Apply Button (Optional) -->
         <div id="chemicalsDropdown" class="dropdown">
             <select id="chemicalsSelect">
                 <option value="">Select Chemical Type</option>
@@ -193,7 +209,6 @@
             </select>
         </div>
 
-        <!-- Dropdown for Fine -->
         <div id="departmentDropdown" class="dropdown">
             <select id="departmentSelect">
                 <option value="">Select Department</option>
@@ -205,7 +220,6 @@
             </select>
         </div>
 
-        <!-- Dropdown for Years -->
         <div id="yearDropdown" class="dropdown">
             <select id="yearSelect">
                 <option value="">Select Year</option>
@@ -215,9 +229,7 @@
             </select>
         </div>
 
-        <!-- Apply Button -->
         <button id="applyBtn" class="apply-btn">Apply</button>
     </div>
 </body>
 </html>
-

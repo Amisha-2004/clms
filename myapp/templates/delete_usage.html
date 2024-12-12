@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Usage</title>
+</head>
+<body>
+    <h1>Delete Usage</h1>
+    <p>Are you sure you want to delete usage entry for Batch: {{ usage.batch }}?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, Delete</button>
+    </form>
+    <a href="{% url 'usage_list' %}">Cancel</a>
+</body>
+</html>

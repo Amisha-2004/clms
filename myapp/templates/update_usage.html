@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Usage</title>
+</head>
+<body>
+    <h1>Update Usage</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Update</button>
+    </form>
+    <a href="{% url 'usage_list' %}">Back to Usage List</a>
+</body>
+</html>

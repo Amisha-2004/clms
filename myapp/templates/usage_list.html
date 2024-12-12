@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Item Table</title>
+    <title>Usage Table</title>
     <style>
         /* Basic reset */
         * {
@@ -101,39 +101,35 @@
 
     <!-- Navbar -->
     <div class="navbar">
-        <a href="{% url 'add_item' %}">Add Item</a>
+        <a href="{% url 'add_usage' %}">Add New Usage</a>
     </div>
 
-    <!-- Table displaying item data -->
-    <h1>Item Table</h1>
+    <!-- Table displaying usage data -->
+    <h1>Usage List</h1>
     <table>
         <thead>
             <tr>
-                <th>Item ID</th>
-                <th>Name</th>
-                <th>Specification</th>
-                <th>Location</th>
-                <th>Company</th>
-                <th>Fund Type</th>
-                <th>Status</th>
-                <th>Category</th>
+                <th>Usage ID</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Batch</th>
+                <th>Quantity</th>
+                <th>Item</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            {% for item in items %}
+            {% for usage in usages %}
             <tr>
-                <td>{{ item.item_id }}</td>
-                <td>{{ item.name }}</td>
-                <td>{{ item.specification }}</td>
-                <td>{{ item.location }}</td>
-                <td>{{ item.company }}</td>
-                <td>{{ item.fund_type }}</td>
-                <td>{{ item.status }}</td>
-                <td>{{ item.category }}</td>
+                <td>{{ usage.usageid }}</td>
+                <td>{{ usage.date }}</td>
+                <td>{{ usage.time }}</td>
+                <td>{{ usage.batch }}</td>
+                <td>{{ usage.quantity }}</td>
+                <td>{{ usage.itemid.name }}</td>
                 <td>
-                    <a href="{% url 'edit_item' item.item_id %}" class="action-btn edit-btn">Edit</a>
-                    <a href="{% url 'delete_item' item.item_id %}" class="action-btn delete-btn">Delete</a>
+                    <a href="{% url 'update_usage' usage.usageid %}" class="action-btn edit-btn">Edit</a>
+                    <a href="{% url 'delete_usage' usage.usageid %}" class="action-btn delete-btn">Delete</a>
                 </td>
             </tr>
             {% endfor %}

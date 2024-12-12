@@ -1,9 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Purchase Table</title>
+    <title>Purchase List</title>
     <style>
         /* Basic reset */
         * {
@@ -21,21 +22,23 @@
         /* Navbar Styling */
         .navbar {
             display: flex;
-            justify-content: flex-start;
-            gap: 15px;
+            justify-content: space-between;
+            align-items: center;
             background-color: #333;
-            padding: 10px 20px;
-            margin-bottom: 20px;
+            padding: 10px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
         }
 
         .navbar a {
             color: white;
+            padding: 10px 20px;
             text-decoration: none;
-            padding: 12px 20px;
             font-size: 16px;
-            background-color: #333;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s;
         }
 
         .navbar a:hover {
@@ -46,7 +49,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            margin-top: 60px;
         }
 
         th, td {
@@ -68,53 +71,65 @@
             background-color: #ddd;
         }
 
-        /* Action Buttons */
+        /* Action Buttons Styling */
         .action-btn {
-            padding: 5px 10px;
-            color: white;
-            text-decoration: none;
+            padding: 6px 12px;
             border-radius: 4px;
             font-size: 14px;
             margin: 0 5px;
+            text-decoration: none;
+            cursor: pointer;
+            display: inline-block;
         }
 
+        /* Edit Button Style */
         .edit-btn {
             background-color: #4CAF50; /* Green */
+            color: white;
         }
 
         .edit-btn:hover {
             background-color: #45a049;
         }
 
+        /* Delete Button Style */
         .delete-btn {
             background-color: #f44336; /* Red */
+            color: white;
         }
 
         .delete-btn:hover {
             background-color: #e53935;
         }
+
+        /* Add New Purchase Button */
+        .add-btn {
+            background-color: #007bff; /* Blue */
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .add-btn:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
 
-    <h1>Purchase Table</h1>
-
-    <!-- Navbar -->
-    <div class="navbar">
-        <a href="{% url 'add_purchase' %}">Add Purchase</a>
-    </div>
-
-    <!-- Table displaying purchase data -->
+    <h2>Purchase List</h2>
+    <a href="{% url 'add_purchase' %}" class="add-btn">Add New Purchase</a> <!-- Add New Purchase Button -->
+    
     <table>
         <thead>
             <tr>
-                <th>ID</th>
+                <th>Purchase ID</th>
                 <th>Date</th>
+                <th>Total Amount</th>
                 <th>Supplier</th>
-                <th>Item</th>
-                <th>Quantity</th>
-                <th>Unit Price</th>
-                <th>Total Price</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -122,16 +137,27 @@
             {% for purchase in purchases %}
             <tr>
                 <td>{{ purchase.purchase_id }}</td>
-                <td>{{ purchase.Date_of_purchase }}</td>
-                <td>{{ purchase.supplier }}</td>
-                <td>{{ purchase.Item_purchased }}</td>
-                <td>{{ purchase.Quantity_purchased }}</td>
-                <td>{{ purchase.Unit_price }}</td>
-                <td>{{ purchase.Total_price }}</td>
+                <td>{{ purchase.date }}</td>
+                <td>{{ purchase.total_amount }}</td>
                 <td>
-                    <a href="{% url 'edit_purchase' purchase.purchase_id %}" class="action-btn edit-btn">Edit</a>
-                    <a href="{% url 'delete_purchase' purchase.purchase_id %}" class="action-btn delete-btn">Delete</a>
+                    {% if purchase.supplier %}
+                        {{ purchase.supplier_id }}
+                    {% else %}
+                        No Supplier Assigned
+                    {% endif %}
                 </td>
+                <td>
+                    {% if purchase.purchase_id %}
+                        <a href="{% url 'update_purchase' purchase.purchase_id %}" class="action-btn edit-btn">Edit</a>
+                        <a href="{% url 'delete_purchase' purchase.purchase_id %}" class="action-btn delete-btn">Delete</a>
+                    {% else %}
+                        <span>No ID</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No purchases found.</td>
             </tr>
             {% endfor %}
         </tbody>

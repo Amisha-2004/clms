@@ -1,8 +1,7 @@
-
-<h1>Edit Item</h1>
+<h2>Edit Sub-item</h2>
 <form method="POST">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Save</button>
 </form>
-<a href="{% url 'item_list' %}">Cancel</a>
+<a href="{% url 'purchase_sub_list' %}">Back</a>
